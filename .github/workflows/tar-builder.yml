@@ -33,14 +33,14 @@ jobs:
       - name: Pack tar
         run: |
           cpu=$(cat /proc/cpuinfo | grep processor | wc -l)  # 获取 CPU 核心数
-          sudo tar -cvf deepin-rootfs.tar deepin-rootfs
-          sudo xz -T $cpu deepin-rootfs.tar
-          echo "fileName=$(ls -1 deepin-rootfs.tar)" >> $GITHUB_OUTPUT
+          cd deepin-rootfs
+          sudo tar -cvf ../deepin-rootfs.tar *
+          sudo xz -T $cpu ../deepin-rootfs.tar
 
       - name: Upload tar
         uses: actions/upload-artifact@v1
         with:
           name: deepin-rootfs-amd64
-          path: deepin-rootfs.tar
+          path: deepin-rootfs.tar.xz
       
     
