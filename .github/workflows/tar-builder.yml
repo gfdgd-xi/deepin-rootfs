@@ -31,8 +31,7 @@ jobs:
         run: |
           sudo debootstrap --arch=amd64 beige deepin-rootfs https://community-packages.deepin.com/deepin/beige/
           # 新增 apt 源标签以修复依赖问题
-          echo -n `cat deepin-rootfs/etc/apt/sources.list` > deepin-rootfs/etc/apt/sources.list
-          echo " commercial community" >> deepin-rootfs/etc/apt/sources.list
+          echo `cat deepin-rootfs/etc/apt/sources.list` commercial community | sudo tee deepin-rootfs/etc/apt/sources.list
 
       - name: Pack tar
         run: |
@@ -74,8 +73,7 @@ jobs:
         run: |
           sudo debootstrap --arch=arm64 beige deepin-rootfs https://community-packages.deepin.com/deepin/beige/
           # 新增 apt 源标签以修复依赖问题
-          echo -n `cat deepin-rootfs/etc/apt/sources.list` > deepin-rootfs/etc/apt/sources.list
-          echo " commercial community" >> deepin-rootfs/etc/apt/sources.list
+          echo `cat deepin-rootfs/etc/apt/sources.list` commercial community | sudo tee deepin-rootfs/etc/apt/sources.list
 
       - name: Pack tar
         run: |
@@ -117,8 +115,7 @@ jobs:
         run: |
           sudo debootstrap --arch=loong64 beige deepin-rootfs https://community-packages.deepin.com/deepin/beige/
           # 新增 apt 源标签以修复依赖问题
-          echo -n `cat deepin-rootfs/etc/apt/sources.list` > deepin-rootfs/etc/apt/sources.list
-          echo " commercial community" >> deepin-rootfs/etc/apt/sources.list
+          echo `cat deepin-rootfs/etc/apt/sources.list` commercial community | sudo tee deepin-rootfs/etc/apt/sources.list
 
       - name: Pack tar
         run: |
@@ -160,8 +157,7 @@ jobs:
         run: |
           sudo debootstrap --arch=riscv64 beige deepin-rootfs https://community-packages.deepin.com/deepin/beige/
           # 新增 apt 源标签以修复依赖问题
-          echo -n `cat deepin-rootfs/etc/apt/sources.list` > deepin-rootfs/etc/apt/sources.list
-          echo " commercial community" >> deepin-rootfs/etc/apt/sources.list
+          echo `cat deepin-rootfs/etc/apt/sources.list` commercial community | sudo tee deepin-rootfs/etc/apt/sources.list
 
       - name: Pack tar
         run: |
