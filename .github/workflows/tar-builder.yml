@@ -21,7 +21,7 @@ jobs:
           # 构建 deb 包
           dpkg-buildpackage -b
           # 安装生成的 deb 包
-          sudo apt install ../*.deb
+          sudo apt install ../*.deb -y
       - name: Get gpg key
         run: |
           sudo cp deepin-archive-camel-keyring.gpg /etc/apt/trusted.gpg.d -rv
