@@ -1,0 +1,46 @@
+name: Build deepin base tar
+run-name: ${{ github.actor }} Build deepin base tar 🚀
+on:
+  workflow_dispatch:
+jobs:
+  amd64:
+    runs-on: ubuntu-24.04 # 24 才有支持 loong 新世界的 Qemu User
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build debootstrap
+        run: |
+          sudo apt update
+          sudo apt install git fakeroot -y   # fakeroot 用于解决构建 deb 的权限问题
+          # 拉取源码包
+          git clone https://github.com/deepin-community/debootstrap --depth=1
+          cd debootstrap
+          # 安装编译依赖
+          sudo apt build-dep . -y
+          # 构建 deb 包
+          dpkg-buildpackage -b
+          # 安装生成的 deb 包
+          sudo apt install ../*.deb
+      - name: Get gpg key
+        run: |
+          sudo cp deepin-archive-camel-keyring.gpg /etc/apt/trusted.gpg.d -rv
+
+      - name: Get deepin base rootfs
+        run: |
+          sudo debootstrap --arch=amd64 beige deepin-rootfs
+
+      - name: Pack tar
+        run: |
+          cpu=$(cat /proc/cpuinfo | grep processor | wc -l)  # 获取 CPU 核心数
+          sudo tar -cvf deepin-rootfs.tar deepin-rootfs
+          sudo xz -T $cpu deepin-rootfs.tar
+          echo "fileName=$(ls -1 deepin-rootfs.tar)" >> $GITHUB_OUTPUT
+
+      - name: Upload tar
+        uses: actions/upload-artifact@v1
+        with:
+          name: deepin-rootfs-amd64
+          path: deepin-rootfs.tar
+      
+    
