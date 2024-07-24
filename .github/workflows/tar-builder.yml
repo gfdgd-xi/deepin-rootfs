@@ -28,7 +28,7 @@ jobs:
 
       - name: Get deepin base rootfs
         run: |
-          sudo debootstrap --arch=amd64 beige deepin-rootfs
+          sudo debootstrap --arch=amd64 beige deepin-rootfs https://community-packages.deepin.com/deepin/beige/
 
       - name: Pack tar
         run: |
