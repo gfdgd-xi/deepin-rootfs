@@ -12,7 +12,7 @@ jobs:
       - name: Build debootstrap
         run: |
           sudo apt update
-          sudo apt install git fakeroot -y   # fakeroot 用于解决构建 deb 的权限问题
+          sudo apt install git qemu-user-static fakeroot -y   # fakeroot 用于解决构建 deb 的权限问题，Qemu 用于跨架构构建
           # 拉取源码包
           git clone https://github.com/deepin-community/debootstrap --depth=1
           cd debootstrap
@@ -52,7 +52,7 @@ jobs:
       - name: Build debootstrap
         run: |
           sudo apt update
-          sudo apt install git fakeroot -y   # fakeroot 用于解决构建 deb 的权限问题
+          sudo apt install git qemu-user-static fakeroot -y   # fakeroot 用于解决构建 deb 的权限问题，Qemu 用于跨架构构建
           # 拉取源码包
           git clone https://github.com/deepin-community/debootstrap --depth=1
           cd debootstrap
@@ -92,7 +92,7 @@ jobs:
       - name: Build debootstrap
         run: |
           sudo apt update
-          sudo apt install git fakeroot -y   # fakeroot 用于解决构建 deb 的权限问题
+          sudo apt install git qemu-user-static fakeroot -y   # fakeroot 用于解决构建 deb 的权限问题，Qemu 用于跨架构构建
           # 拉取源码包
           git clone https://github.com/deepin-community/debootstrap --depth=1
           cd debootstrap
@@ -132,7 +132,7 @@ jobs:
       - name: Build debootstrap
         run: |
           sudo apt update
-          sudo apt install git fakeroot -y   # fakeroot 用于解决构建 deb 的权限问题
+          sudo apt install git qemu-user-static fakeroot -y   # fakeroot 用于解决构建 deb 的权限问题，Qemu 用于跨架构构建
           # 拉取源码包
           git clone https://github.com/deepin-community/debootstrap --depth=1
           cd debootstrap
