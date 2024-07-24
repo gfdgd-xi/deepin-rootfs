@@ -1,6 +1,7 @@
 name: Build deepin base tar
 run-name: ${{ github.actor }} Build deepin base tar 🚀
 on:
+  push:
   workflow_dispatch:
 jobs:
   amd64:
@@ -29,6 +30,9 @@ jobs:
       - name: Get deepin base rootfs
         run: |
           sudo debootstrap --arch=amd64 beige deepin-rootfs https://community-packages.deepin.com/deepin/beige/
+          # 新增 apt 源标签以修复依赖问题
+          echo -n `cat deepin-rootfs/etc/apt/sources.list` > deepin-rootfs/etc/apt/sources.list
+          echo " commercial community" >> deepin-rootfs/etc/apt/sources.list
 
       - name: Pack tar
         run: |
@@ -38,7 +42,7 @@ jobs:
           sudo xz -T $cpu ../deepin-rootfs.tar
 
       - name: Upload tar
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: deepin-rootfs-amd64
           path: deepin-rootfs.tar.xz
@@ -69,6 +73,9 @@ jobs:
       - name: Get deepin base rootfs
         run: |
           sudo debootstrap --arch=arm64 beige deepin-rootfs https://community-packages.deepin.com/deepin/beige/
+          # 新增 apt 源标签以修复依赖问题
+          echo -n `cat deepin-rootfs/etc/apt/sources.list` > deepin-rootfs/etc/apt/sources.list
+          echo " commercial community" >> deepin-rootfs/etc/apt/sources.list
 
       - name: Pack tar
         run: |
@@ -78,7 +85,7 @@ jobs:
           sudo xz -T $cpu ../deepin-rootfs.tar
 
       - name: Upload tar
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: deepin-rootfs-arm64
           path: deepin-rootfs.tar.xz
@@ -109,6 +116,9 @@ jobs:
       - name: Get deepin base rootfs
         run: |
           sudo debootstrap --arch=loong64 beige deepin-rootfs https://community-packages.deepin.com/deepin/beige/
+          # 新增 apt 源标签以修复依赖问题
+          echo -n `cat deepin-rootfs/etc/apt/sources.list` > deepin-rootfs/etc/apt/sources.list
+          echo " commercial community" >> deepin-rootfs/etc/apt/sources.list
 
       - name: Pack tar
         run: |
@@ -118,7 +128,7 @@ jobs:
           sudo xz -T $cpu ../deepin-rootfs.tar
 
       - name: Upload tar
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: deepin-rootfs-loong64
           path: deepin-rootfs.tar.xz
@@ -149,6 +159,9 @@ jobs:
       - name: Get deepin base rootfs
         run: |
           sudo debootstrap --arch=riscv64 beige deepin-rootfs https://community-packages.deepin.com/deepin/beige/
+          # 新增 apt 源标签以修复依赖问题
+          echo -n `cat deepin-rootfs/etc/apt/sources.list` > deepin-rootfs/etc/apt/sources.list
+          echo " commercial community" >> deepin-rootfs/etc/apt/sources.list
 
       - name: Pack tar
         run: |
@@ -158,7 +171,7 @@ jobs:
           sudo xz -T $cpu ../deepin-rootfs.tar
 
       - name: Upload tar
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: deepin-rootfs-riscv64
           path: deepin-rootfs.tar.xz
