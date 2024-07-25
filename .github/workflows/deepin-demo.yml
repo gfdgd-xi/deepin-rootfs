@@ -1,0 +1,18 @@
+name: deepin23 example
+run-name: ${{ github.actor }} deepin23 example 🚀
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  amd64:
+    runs-on: ubuntu-latest
+    container: gfdgdxi/deepin:23rc2
+    steps:
+      - name: Example
+        run: |
+          apt update
+          apt upgrade -y
+          apt install neofetch -y
+          neofetch
+          
+      
